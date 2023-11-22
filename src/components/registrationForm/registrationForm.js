@@ -9,7 +9,7 @@ const RegistrationForm=() =>{
     const fileRef=useRef();
     const mobNoRef=useRef();
     const emailRef=useRef();
-    
+
     const formSubmitHandler=(e) =>{
         e.preventDefault();
     }
@@ -66,7 +66,6 @@ const RegistrationForm=() =>{
                     <Form.Group className="p-3">                    
                         <Form.Control 
                          type="file" 
-                         placeholder="Select a File-" 
                          required 
                          size="md"
                          width="auto" 
