@@ -12,6 +12,6 @@ const userDatabaseReducer=createSlice({
     }
 })
 
-export const authActions=userDatabaseReducer.actions;
+export const userDatabaseActions=userDatabaseReducer.actions;
 
 export default userDatabaseReducer;
