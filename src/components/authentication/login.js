@@ -34,7 +34,7 @@ const Login=() =>{
              dispatch(authActions.setToken(response.data.idToken));
              setTimeout(() =>{
                 navigate("/")
-             },5000);
+             },2000);
             } catch(error){
                 setFailOpen(true);
             }
@@ -84,9 +84,9 @@ const Login=() =>{
                 </div>
             </Form>
         </Container>
-        <Snackbar open={successOpen} autoHideDuration={5000} onClose={onCloseHandler}>
+        <Snackbar open={successOpen} autoHideDuration={2000} onClose={onCloseHandler}>
             <Alert severity="success" sx={{ width: '100%' }}>
-                Successfully logged in !
+                ! Successfully logged in ! Redirecting to home page... 
             </Alert>
         </Snackbar>
         <Snackbar open={failOpen} autoHideDuration={5000} onClose={onCloseHandler}>
