@@ -4,6 +4,7 @@ import Home from "./components/homePage/home";
 import Login from "./components/authentication/login";
 import ResetPassword from "./components/authentication/resetPassword";
 import SignUp from "./components/authentication/signUp";
+import RegistrationForm from "./components/registrationForm/registrationForm";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
               <Route path="/login" element={<Login/>}/>
               <Route path="/signUp" element={<SignUp/>}/>
               <Route path="/forgotPswd" element={<ResetPassword/>}/>
+              <Route path="/registrationForm" element={<RegistrationForm/>}/>
             </Routes>
           </div>
       </BrowserRouter>
