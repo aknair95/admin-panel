@@ -10,7 +10,9 @@ const SignUp=() =>{
     const passwordRef=useRef();
     const confirmPasswordRef=useRef();
     const navigate=useNavigate();
-    const [open,setOpen]=useState(false);
+    const [successOpen,setSuccessOpen]=useState(false);
+    const [failOpen,setFailOpen]=useState(false);
+    const [serverErrorOpen,setServerError]=useState(false);
    
     const signUpHandler= async (e) =>{
         e.preventDefault();
@@ -25,14 +27,13 @@ const SignUp=() =>{
                 password: enteredPassword,
                 returnSecureToken: true
              });
-            setOpen(true);
-           
+            setSuccessOpen(true);
             // navigate("/login");
             } catch(error){
-                alert("Please enter valid email & password(min length- 6 characters)");
+                setServerError(false);
             }
         } else{
-            alert("!!! Incorrect Password. Please Enter Again !!!");
+            setFailOpen(true);
         }
         
         emailRef.current.value="";
@@ -45,7 +46,9 @@ const SignUp=() =>{
     }
 
     const onCloseHandler=() =>{
-        setOpen(false);
+        setSuccessOpen(false);
+        setFailOpen(false);
+        serverErrorOpen(false);
     }
 
     return(
@@ -87,11 +90,21 @@ const SignUp=() =>{
                     <Button variant="link" size="md" onClick={loginExistingAccHandler}>Login With Existing Account? Login</Button>
                 </div>
             </Form>
-            <Snackbar open={open} autoHideDuration={5000} onClose={onCloseHandler}>
+            <Snackbar open={successOpen} autoHideDuration={5000} onClose={onCloseHandler}>
                 <Alert severity="success" sx={{ width: '100%' }}>
                     Successfully signed up !
                 </Alert>
-            </Snackbar> 
+            </Snackbar>
+            <Snackbar open={failOpen} autoHideDuration={5000} onClose={onCloseHandler}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    Incorrect Password.Please Enter Again !
+                </Alert>
+            </Snackbar>
+            <Snackbar open={serverErrorOpen} autoHideDuration={5000} onClose={onCloseHandler}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    Server Error.Try again !
+                </Alert>
+            </Snackbar>  
         </Container>
       </>       
     )

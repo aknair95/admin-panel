@@ -1,25 +1,26 @@
 import classes from "./resetPassword.module.css";
-import { Button,Container,Form, Spinner } from "react-bootstrap";
-import { useRef } from "react";
+import { Button,Container,Form } from "react-bootstrap";
+import { useRef,useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Snackbar,Alert } from "@mui/material";
 
 const ResetPassword=() =>{
-
     const emailRef=useRef();
     const navigate=useNavigate();
+    const [open,setOpen]=useState(false);
    
     const resetPasswordHandler= async(e) =>{
         e.preventDefault();
-        (<Spinner animation="border"/>)
         const enteredEmail=emailRef.current.value;
         
         //POST firebase request to reset password link to email
         try{ 
-            await axios.post("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyCU6Gv14nvJALzonBsNjtyx2RO_G4aW4BQ",{
+            await axios.post("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBBnP-VDlrSXUhJleaLC3Dm-9UmlaZoZIs",{
                 requestType: "PASSWORD_RESET",
                 email: enteredEmail
              });
+            setOpen(true);
             alert("!!! Password reset link sent to your email !!!");
             navigate("/login");
             } catch(error){
@@ -31,7 +32,12 @@ const ResetPassword=() =>{
         navigate("/login");
     }
 
+    const onCloseHandler=() =>{
+        setOpen(false);
+    }
+
     return(
+        <>
             <Container className={classes.formContainer} style={{width: "80vw",height: "max-content"}}>
                 <h3 className="p-2">RESET PASSWORD</h3>
                 <Form onSubmit={resetPasswordHandler}>
@@ -49,7 +55,13 @@ const ResetPassword=() =>{
                         <Button variant="danger" size="md" onClick={cancelBtnHandler}>CANCEL</Button>
                     </div>
                 </Form>
-            </Container> 
+            </Container>
+            <Snackbar open={open} autoHideDuration={5000} onClose={onCloseHandler}>
+                <Alert severity="success" sx={{ width: '100%' }}>
+                    Password reset link sent to your email !
+                </Alert>
+            </Snackbar>
+        </>   
     )
 }
 
