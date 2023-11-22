@@ -11,14 +11,16 @@ const NavigationBar=() =>{
     const activePath=document.location.pathname;
     let homePage=false;
     let loginPage=false;
+    let registrationForm=false;
 
-    if(activePath==="/"){
-        homePage=true;
+    switch(activePath){
+        case "/login": loginPage=true;
+                       break;
+        case "/registrationForm": registrationForm=true;
+                                  break;
+        default: homePage=true;                                             
     }
-    else{
-        loginPage=true;
-    }                    
-
+   
     const token=localStorage.getItem("token");
     dispatch(authActions.setToken(token));
 
@@ -38,6 +40,7 @@ const NavigationBar=() =>{
                 <Container>
                     <Nav className="me-auto">
                         <Nav.Link href="/" active={homePage}>HOME</Nav.Link>
+                        {token!=null && <Nav.Link href="/registrationForm" active={registrationForm}>REGISTER USER</Nav.Link>}
                         {token===null && <Nav.Link href="/login" active={loginPage}>ADMIN LOGIN</Nav.Link>}
                     </Nav>
                     {!!token && <Button variant="danger" size="md" onClick={logoutHandler}>Logout</Button>} 
