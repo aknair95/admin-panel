@@ -8,7 +8,8 @@ import { Snackbar,Alert } from "@mui/material";
 const ResetPassword=() =>{
     const emailRef=useRef();
     const navigate=useNavigate();
-    const [open,setOpen]=useState(false);
+    const [successOpen,setSuccessOpen]=useState(false);
+    const [failOpen,setFailOpen]=useState(false);
    
     const resetPasswordHandler= async(e) =>{
         e.preventDefault();
@@ -20,11 +21,10 @@ const ResetPassword=() =>{
                 requestType: "PASSWORD_RESET",
                 email: enteredEmail
              });
-            setOpen(true);
-            alert("!!! Password reset link sent to your email !!!");
-            navigate("/login");
-            } catch(error){
-                alert("!!! Invalid Email !!!");
+            setSuccessOpen(true);
+            // navigate("/login");
+            }catch(error){
+                setFailOpen(true);
             }
     }
 
@@ -33,7 +33,8 @@ const ResetPassword=() =>{
     }
 
     const onCloseHandler=() =>{
-        setOpen(false);
+        setSuccessOpen(false)
+        setFailOpen(false);
     }
 
     return(
@@ -56,9 +57,14 @@ const ResetPassword=() =>{
                     </div>
                 </Form>
             </Container>
-            <Snackbar open={open} autoHideDuration={5000} onClose={onCloseHandler}>
+            <Snackbar open={successOpen} autoHideDuration={5000} onClose={onCloseHandler}>
                 <Alert severity="success" sx={{ width: '100%' }}>
-                    Password reset link sent to your email !
+                    Password reset link sent to your mail !
+                </Alert>
+            </Snackbar>
+            <Snackbar open={failOpen} autoHideDuration={5000} onClose={onCloseHandler}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    Invalid Email !
                 </Alert>
             </Snackbar>
         </>   
