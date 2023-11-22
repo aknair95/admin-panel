@@ -38,7 +38,7 @@ const NavigationBar=() =>{
                 <Container>
                     <Nav className="me-auto">
                         <Nav.Link href="/" active={homePage}>HOME</Nav.Link>
-                        {token===null && <Nav.Link href="/login" active={loginPage}>LOGIN</Nav.Link>}
+                        {token===null && <Nav.Link href="/login" active={loginPage}>ADMIN LOGIN</Nav.Link>}
                     </Nav>
                     {!!token && <Button variant="danger" size="md" onClick={logoutHandler}>Logout</Button>} 
                 </Container>  
