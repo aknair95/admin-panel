@@ -28,7 +28,9 @@ const SignUp=() =>{
                 returnSecureToken: true
              });
             setSuccessOpen(true);
-            // navigate("/login");
+            setTimeout(() =>{
+                navigate("/login")
+             },2000);
             } catch(error){
                 setServerError(false);
             }
@@ -90,19 +92,19 @@ const SignUp=() =>{
                     <Button variant="link" size="md" onClick={loginExistingAccHandler}>Login With Existing Account? Login</Button>
                 </div>
             </Form>
-            <Snackbar open={successOpen} autoHideDuration={5000} onClose={onCloseHandler}>
+            <Snackbar open={successOpen} autoHideDuration={2000} onClose={onCloseHandler}>
                 <Alert severity="success" sx={{ width: '100%' }}>
-                    Successfully signed up !
+                    ! Successfully signed up ! Redirecting to login page...
                 </Alert>
             </Snackbar>
             <Snackbar open={failOpen} autoHideDuration={5000} onClose={onCloseHandler}>
                 <Alert severity="error" sx={{ width: '100%' }}>
-                    Incorrect Password.Please Enter Again !
+                    ! Incorrect Password ! Please Enter Again...
                 </Alert>
             </Snackbar>
             <Snackbar open={serverErrorOpen} autoHideDuration={5000} onClose={onCloseHandler}>
                 <Alert severity="error" sx={{ width: '100%' }}>
-                    Server Error.Try again !
+                    ! Server Error ! Try again after sometime...
                 </Alert>
             </Snackbar>  
         </Container>
