@@ -55,7 +55,7 @@ const SignUp=() =>{
 
     return(
        <> 
-        <Container className={classes.formContainer} style={{width: "80vw",height: "max-content"}}>
+        <Container className={classes.formContainer} style={{width: "70vw",height: "max-content"}}>
             <h3 className="p-2">SIGN UP</h3>
             <Form onSubmit={signUpHandler}>
                 <Form.Group className="p-3">                    
