@@ -7,7 +7,7 @@ const userDatabaseReducer=createSlice({
     initialState: initialState,
     reducers: {
         addUserData(state,action){
-            state.userData=[...state.userData,action.payload];
+            state.userData.push({...action.payload});
         }
     }
 })
