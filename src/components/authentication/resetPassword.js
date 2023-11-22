@@ -22,7 +22,9 @@ const ResetPassword=() =>{
                 email: enteredEmail
              });
             setSuccessOpen(true);
-            // navigate("/login");
+            setTimeout(() =>{
+                navigate("/login")
+             },2000);
             }catch(error){
                 setFailOpen(true);
             }
@@ -57,14 +59,14 @@ const ResetPassword=() =>{
                     </div>
                 </Form>
             </Container>
-            <Snackbar open={successOpen} autoHideDuration={5000} onClose={onCloseHandler}>
+            <Snackbar open={successOpen} autoHideDuration={2000} onClose={onCloseHandler}>
                 <Alert severity="success" sx={{ width: '100%' }}>
-                    Password reset link sent to your mail !
+                    ! Password reset link sent to your mail ! Redirecting to login page...
                 </Alert>
             </Snackbar>
             <Snackbar open={failOpen} autoHideDuration={5000} onClose={onCloseHandler}>
                 <Alert severity="error" sx={{ width: '100%' }}>
-                    Invalid Email !
+                    ! Invalid Email !
                 </Alert>
             </Snackbar>
         </>   
