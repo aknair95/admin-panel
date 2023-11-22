@@ -1,10 +1,9 @@
 import { Container,Form,Button,Row,Col } from "react-bootstrap";
 import classes from "./registrationForm.module.css"
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userDatabaseActions } from "../../store/userDatabaseReducer";
 import axios from "axios";
-import { Alert } from "@mui/material";
 
 const RegistrationForm=() =>{
     const dispatch=useDispatch();
@@ -16,7 +15,20 @@ const RegistrationForm=() =>{
     const mobNoRef=useRef();
     const emailRef=useRef();
 
-    const formSubmitHandler=async(e) =>{
+    // Storing updated user data array to firebase
+    useEffect(() =>{
+        const postUpdatedData=async() =>{
+            try{
+                await axios.patch("https://admin-panel-bbe99-default-rtdb.firebaseio.com/database.json",{
+                    userData
+                });
+            } catch(error){
+               alert("! Network Error !");
+            }}
+        postUpdatedData();    
+    },[userData]);
+
+    const formSubmitHandler=(e) =>{
         e.preventDefault();
         const enteredFirstName=firstNameRef.current.value;
         const enteredLastName=lastNameRef.current.value;
@@ -36,26 +48,14 @@ const RegistrationForm=() =>{
 
         dispatch(userDatabaseActions.addUserData(newUserData));
 
-        try{
-            await axios.patch(`https://admin-panel-bbe99-default-rtdb.firebaseio.com/userData.json`,{
-                newUserData
-            });
-            <Alert severity="success">Sent</Alert>  
-        } catch(error){
-            <Alert severity="danger">!!! Error !!!</Alert>
-        }
-
         firstNameRef.current.value="";
         lastNameRef.current.value="";
         ageRef.current.value="";
         fileRef.current.value="";
         mobNoRef.current.value="";
         emailRef.current.value="";
-
-        console.log(userData);
-
     }
-    
+
     return(
         <>
              <Container className={classes.formContainer} style={{width: "70vw",height: "max-content"}}>
