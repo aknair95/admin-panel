@@ -7,12 +7,13 @@ import { useEffect } from "react";
 const Home=() =>{
     const token=localStorage.getItem("token");
     const navigate=useNavigate();
+    
     useEffect(() =>{
         if(token===null){
             navigate("/login");
         }
     },);
-    
+     
     return(
         <>
             <header className={classes.hdr}>
