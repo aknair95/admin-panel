@@ -15,7 +15,7 @@ const RegistrationForm=() =>{
     }
     return(
         <>
-             <Container className={classes.formContainer} style={{width: "50vw",height: "max-content"}}>
+             <Container className={classes.formContainer} style={{width: "70vw",height: "max-content"}}>
                 <h3 className="p-2">REGISTRATION FORM</h3>
                 <Form onSubmit={formSubmitHandler}>
                     <Row className="p-3">
