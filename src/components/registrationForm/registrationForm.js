@@ -31,7 +31,10 @@ const RegistrationForm=() =>{
             age: enteredAge,
             file: uploadedFile,
             mobNo: enteredMobNo,
-            email: enteredEmail
+            email: enteredEmail,
+            updateBtnDisabled: false,
+            enableBtnDisabled: false,
+            disableBtnDisabled: false
         }
         const updatedUserData=[...userData,newUserData]
         dispatch(userDatabaseActions.addUserData(updatedUserData));
