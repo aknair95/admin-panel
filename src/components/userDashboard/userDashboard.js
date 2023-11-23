@@ -13,6 +13,7 @@ const UserDashboard=() =>{
 
     return(
         <div className={classes.userList}>
+            <h3 style={{textDecoration: "underline"}}>USER PANEL</h3>
             <ListGroup as="ul">
             { 
                 userData.map((item) =>{

@@ -6,6 +6,12 @@
     margin-right: auto;
 }
 
+.userList h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .userDetails {
     margin: 3px;
     padding: 1px;
