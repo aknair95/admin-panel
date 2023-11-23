@@ -25,6 +25,7 @@ const RegistrationForm=() =>{
         const enteredEmail=emailRef.current.value;
 
         const newUserData={
+            id: Math.random(),
             firstName: enteredFirstName,
             lastName: enteredLastName,
             age: enteredAge,
