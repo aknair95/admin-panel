@@ -7,12 +7,20 @@ import { useEffect } from "react";
 const Home=() =>{
     const token=localStorage.getItem("token");
     const navigate=useNavigate();
-    
+
     useEffect(() =>{
         if(token===null){
             navigate("/login");
         }
     },);
+
+    const adminBtnHandler=() =>{
+        navigate("/adminDashboard");
+    }
+
+    const userBtnHandler=() =>{
+        navigate("/userDashboard");
+    }
      
     return(
         <>
@@ -20,8 +28,8 @@ const Home=() =>{
                 <h2> Welcome to Admin Panel </h2><hr/>
             </header>
             <div className={classes.btns}>
-                <Button>ADMIN DASHBOARD</Button>
-                <Button>USER DASHBOARD</Button>
+                <Button onClick={adminBtnHandler}>ADMIN DASHBOARD</Button>
+                <Button onClick={userBtnHandler}>USER DASHBOARD</Button>
             </div>
         </>
         
