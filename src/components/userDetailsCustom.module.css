@@ -1,0 +1,8 @@
+.img {
+    margin-left: 40vw;
+}
+
+.col {
+    display: flex;
+    gap: 5px;
+}
