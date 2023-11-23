@@ -18,7 +18,7 @@ const UserDashboard=() =>{
             { 
                 userData.map((item) =>{
                     return (
-                            <div key={Math.random()} className={classes.userDetails}>
+                            <div key={item.id} className={classes.userDetails}>
                               <ListGroup.Item as="li">
                                     <Row>
                                         <UserDetailsCustom

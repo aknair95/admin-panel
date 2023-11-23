@@ -33,8 +33,8 @@ const RegistrationForm=() =>{
             mobNo: enteredMobNo,
             email: enteredEmail,
             updateBtnDisabled: false,
-            enableBtnDisabled: false,
-            disableBtnDisabled: true
+            enableBtnDisabled: true,
+            disableBtnDisabled: false
         }
         const updatedUserData=[...userData,newUserData]
         dispatch(userDatabaseActions.addUserData(updatedUserData));
