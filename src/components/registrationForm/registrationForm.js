@@ -115,11 +115,12 @@ const RegistrationForm=() =>{
                             ref={ageRef}/>
                         </Form.Group>
                         <Form.Group as={Col}>                
-                            <Form.Control 
-                            type="file" 
+                            <Form.Control
+                            type="url"
+                            placeholder="Profile Pic URL"
                             required 
                             size="md"
-                            width="auto" 
+                            width="auto"
                             ref={fileRef}/>
                         </Form.Group>
                     </Row>
