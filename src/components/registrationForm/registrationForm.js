@@ -15,19 +15,6 @@ const RegistrationForm=() =>{
     const mobNoRef=useRef();
     const emailRef=useRef();
 
-    // Storing updated user data array to firebase
-    useEffect(() =>{
-        const postUpdatedData=async() =>{
-            try{
-                await axios.patch("https://admin-panel-bbe99-default-rtdb.firebaseio.com/database.json",{
-                    userData
-                });
-            } catch(error){
-               alert("! Network Error !");
-            }}
-        postUpdatedData();    
-    },[userData]);
-
     const formSubmitHandler=(e) =>{
         e.preventDefault();
         const enteredFirstName=firstNameRef.current.value;
@@ -45,8 +32,8 @@ const RegistrationForm=() =>{
             mobNo: enteredMobNo,
             email: enteredEmail
         }
-
-        dispatch(userDatabaseActions.addUserData(newUserData));
+        const updatedUserData=[...userData,newUserData]
+        dispatch(userDatabaseActions.addUserData(updatedUserData));
 
         firstNameRef.current.value="";
         lastNameRef.current.value="";
@@ -55,6 +42,19 @@ const RegistrationForm=() =>{
         mobNoRef.current.value="";
         emailRef.current.value="";
     }
+
+    // Storing updated user data array to firebase database
+    useEffect(() =>{
+        const postUpdatedData=async() =>{
+            try{
+                await axios.patch("https://admin-panel-bbe99-default-rtdb.firebaseio.com/database.json",{
+                    userData
+                });
+            } catch(error){
+               alert("! Network Error !");
+            }}
+        postUpdatedData();    
+    },[userData]);
 
     return(
         <>
