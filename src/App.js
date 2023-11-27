@@ -22,13 +22,13 @@ function App() {
         try{
             const response=await axios.get("https://admin-panel-bbe99-default-rtdb.firebaseio.com/database.json");
             if(!!response.data){
-              dispatch(userDatabaseActions.addUserData(response.data.userData));
+              dispatch(userDatabaseActions.addUserData(response.data.updatedUserData));
             }
         }catch(error){
             alert("! Network Error !");
         }}
       getFirebaseUserData();
-    },);
+    },[]);
 
   return (
     <div className="app">

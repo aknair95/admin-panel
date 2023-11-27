@@ -1,6 +1,6 @@
 import { Container,Form,Button,Row,Col } from "react-bootstrap";
 import classes from "./registrationForm.module.css"
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userDatabaseActions } from "../../store/userDatabaseReducer";
 import axios from "axios";
@@ -15,7 +15,7 @@ const RegistrationForm=() =>{
     const mobNoRef=useRef();
     const emailRef=useRef();
 
-    const formSubmitHandler=(e) =>{
+    const formSubmitHandler=async(e) =>{
         e.preventDefault();
         const enteredFirstName=firstNameRef.current.value;
         const enteredLastName=lastNameRef.current.value;
@@ -39,6 +39,16 @@ const RegistrationForm=() =>{
         const updatedUserData=[...userData,newUserData]
         dispatch(userDatabaseActions.addUserData(updatedUserData));
 
+        // Storing updated user data array to firebase database
+        try{
+            await axios.patch("https://admin-panel-bbe99-default-rtdb.firebaseio.com/database.json",{
+                updatedUserData
+            });
+        } catch(error){
+        alert("! Network Error !");
+        }
+       
+
         firstNameRef.current.value="";
         lastNameRef.current.value="";
         ageRef.current.value="";
@@ -46,19 +56,6 @@ const RegistrationForm=() =>{
         mobNoRef.current.value="";
         emailRef.current.value="";
     }
-
-    // Storing updated user data array to firebase database
-    useEffect(() =>{
-        const postUpdatedData=async() =>{
-            try{
-                await axios.patch("https://admin-panel-bbe99-default-rtdb.firebaseio.com/database.json",{
-                    userData
-                });
-            } catch(error){
-               alert("! Network Error !");
-            }}
-        postUpdatedData();    
-    },[userData]);
 
     return(
         <>
