@@ -38,7 +38,7 @@ const UserDashboard=() =>{
             <h3 style={{textDecoration: "underline"}}>USER PANEL</h3>
             <ListGroup as="ul">
             { 
-                userData.map((item) =>{
+                userData!==undefined && userData.map((item) =>{
                     return (
                             <div key={item.id} className={classes.userDetails}>
                               <ListGroup.Item as="li">
