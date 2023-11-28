@@ -29,7 +29,7 @@ const UserDashboard=() =>{
                                          mobNo={item.mobNo}
                                          file={item.file}/>
                                         <Col className={classes.btn}>
-                                            <Button onClick={updateBtnHandler}>Update</Button>
+                                            <Button onClick={updateBtnHandler} disabled={item.disableBtnDisabled}>Update</Button>
                                         </Col>
                                     </Row>
                               </ListGroup.Item>
