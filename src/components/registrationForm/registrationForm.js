@@ -4,10 +4,14 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userDatabaseActions } from "../../store/userDatabaseReducer";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationForm=() =>{
     const dispatch=useDispatch();
-    const userData=useSelector((state) => state.userDatabase.userData );
+    const navigate=useNavigate();
+    const userData=useSelector((state) => state.userDatabase.userData);
+    const preFillData=useSelector((state) => state.userDatabase.preFillData);
+    const preFillDataLS=localStorage.getItem("preFillData");
     const firstNameRef=useRef();
     const lastNameRef=useRef();
     const ageRef=useRef();
@@ -36,6 +40,7 @@ const RegistrationForm=() =>{
             enableBtnDisabled: true,
             disableBtnDisabled: false
         }
+
         const updatedUserData=[...userData,newUserData]
         dispatch(userDatabaseActions.addUserData(updatedUserData));
 
@@ -48,19 +53,20 @@ const RegistrationForm=() =>{
         alert("! Network Error !");
         }
        
-
         firstNameRef.current.value="";
         lastNameRef.current.value="";
         ageRef.current.value="";
         fileRef.current.value="";
         mobNoRef.current.value="";
         emailRef.current.value="";
+        localStorage.removeItem("preFillData");
+        navigate("/userDashboard");
     }
 
     return(
         <>
              <Container className={classes.formContainer} style={{width: "70vw",height: "max-content"}}>
-                <h3 className="p-2">REGISTRATION FORM</h3>
+                <h3 className="p-2">{preFillDataLS===null?"REGISTRATION FORM":"UPDATE FORM"}</h3>
                 <Form onSubmit={formSubmitHandler}>
                     <Row className="p-3">
                         <Form.Group as={Col}>
@@ -70,7 +76,8 @@ const RegistrationForm=() =>{
                             required 
                             size="md"
                             width="auto" 
-                            ref={firstNameRef}/>
+                            ref={firstNameRef}
+                            defaultValue={preFillData.firstName}/>
                         </Form.Group>                 
                         <Form.Group as={Col}>                 
                             <Form.Control
@@ -79,7 +86,8 @@ const RegistrationForm=() =>{
                             required 
                             size="md"
                             width="auto" 
-                            ref={lastNameRef}/>
+                            ref={lastNameRef}
+                            defaultValue={preFillData.lastName}/>
                         </Form.Group>
                     </Row>
                     <Row className="p-3">
@@ -90,7 +98,8 @@ const RegistrationForm=() =>{
                             required 
                             size="md"
                             width="auto" 
-                            ref={emailRef}/>
+                            ref={emailRef}
+                            defaultValue={preFillData.email}/>
                         </Form.Group>
                         <Form.Group as={Col}>                
                             <Form.Control 
@@ -100,7 +109,8 @@ const RegistrationForm=() =>{
                             required
                             size="md"
                             width="auto" 
-                            ref={mobNoRef}/>
+                            ref={mobNoRef}
+                            defaultValue={preFillData.mobNo}/>
                         </Form.Group>
                     </Row>
                     <Row className="p-3">
@@ -113,7 +123,8 @@ const RegistrationForm=() =>{
                             required 
                             size="md"
                             width="auto" 
-                            ref={ageRef}/>
+                            ref={ageRef}
+                            defaultValue={preFillData.age}/>
                         </Form.Group>
                         <Form.Group as={Col}>                
                             <Form.Control
@@ -122,7 +133,8 @@ const RegistrationForm=() =>{
                             required 
                             size="md"
                             width="auto"
-                            ref={fileRef}/>
+                            ref={fileRef}
+                            defaultValue={preFillData.file}/>
                         </Form.Group>
                     </Row>
                     <div className={classes.Btn}>
